@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "id": "fine",
+      "animate_assets": "assets/data/Fine.mp4"
+    },
+    {
+      "id": "hi",
+      "animate_assets": "assets/data/Hi.mp4"
+    },
+    {
+      "id": "how",
+      "animate_assets": "assets/data/How Are you Doing.mp4"
+    }
+  ]
+}
