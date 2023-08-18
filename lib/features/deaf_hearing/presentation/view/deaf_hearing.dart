@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/utils/assets_manager.dart';
-import '../../../../core/utils/mqtt_conntioon.dart';
+import '../../../main/manager/app_cubit/app_cubit.dart';
 
 class DeafHearing extends StatelessWidget {
   const DeafHearing({Key? key}) : super(key: key);
@@ -53,8 +53,7 @@ class DeafHearing extends StatelessWidget {
                 ),
                 onPressed: () {
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => const MQTTClient()),);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen(
-                    hearing: false,),),);
+                  AppCubit.get(context).navigateTo(context, const MainScreen(hearing: false));
                 },
                 child: const Text('Visual Aid'),
               ),
@@ -78,9 +77,8 @@ class DeafHearing extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ArduinoConnectDialog()));
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen(
-                  // hearing: true,),),);
+                  // AppCubit.get(context).navigateTo(context, const ArduinoConnectDialog());
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ArduinoConnectDialog(),),);
                 },
                 child: Text('Glove User',
                 style: Styles.textStyle16.copyWith(

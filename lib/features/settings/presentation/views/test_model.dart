@@ -1,7 +1,5 @@
-import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
-import 'package:tflite/tflite.dart';
 
 class MyModelScreen extends StatefulWidget {
   @override
@@ -18,19 +16,19 @@ class _MyModelScreenState extends State<MyModelScreen> {
   }
 
   Future<void> loadModel() async {
-    final modelPath = await _downloadModelFromFirebase();
-    await Tflite.loadModel(model: 'assets/converted_model.tflite');
+    // final modelPath = await _downloadModelFromFirebase();
+    // await Tflite.loadModel(model: 'assets/converted_model.tflite');
     setState(() {
       _isLoaded = true;
     });
   }
 
-  Future<TaskSnapshot> _downloadModelFromFirebase() async {
-    final storage = FirebaseStorage.instance;
-    final ref = storage.ref('assets/converted_model.tflite');
-    final file = await ref.writeToFile(File('converted_model.tflite'));
-    return file;
-  }
+  // Future<TaskSnapshot> _downloadModelFromFirebase() async {
+  //   final storage = FirebaseStorage.instance;
+  //   final ref = storage.ref('assets/converted_model.tflite');
+  //   final file = await ref.writeToFile(File('converted_model.tflite'));
+  //   return file;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +46,7 @@ class _MyModelScreenState extends State<MyModelScreen> {
 
   @override
   void dispose() {
-    Tflite.close();
+    // Tflite.close();
     super.dispose();
   }
 }

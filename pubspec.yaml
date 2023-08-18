@@ -51,10 +51,13 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_ml_model_downloader: ^0.2.3+3
   intl: ^0.18.1
-  tflite: ^1.1.2
+#  tflite: ^1.1.2
   image_picker: ^0.8.9
   firebase_storage: ^11.2.3
-  tflite_flutter: ^0.10.1
+#  tflite_flutter: ^0.10.1
+  animate_do: ^3.0.2
+  file_picker: ^5.3.3
+  tflite: ^1.1.2
 
 
 dev_dependencies:

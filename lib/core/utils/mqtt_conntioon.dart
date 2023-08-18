@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:brain_voice/core/utils/styles.dart';
@@ -10,15 +9,12 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import 'package:typed_data/src/typed_buffer.dart';
 
 import '../../app_constance.dart';
 import '../../features/connection/presentation/view/widgets/video_player.dart';
 import '../../features/main/manager/app_cubit/app_cubit.dart';
-import '../../features/main/model/data_model.dart';
 import '../../features/main/presentation/view/main_screen.dart';
 import '../../features/translator/presentation/view/widgets/drop_down.dart';
-import '../../features/translator/presentation/view/widgets/input_field.dart';
 import 'assets_manager.dart';
 
 class MQTTClient extends StatefulWidget {

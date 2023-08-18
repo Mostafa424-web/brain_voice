@@ -1,13 +1,11 @@
 import 'dart:io';
 
 import 'package:brain_voice/features/deaf_hearing/manager/connection_states.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
-import '../../connection/presentation/view/connectionScreen.dart';
 
 class ConnectionCubit extends Cubit<ConnectionStates> {
   ConnectionCubit() : super(InitialState());
@@ -62,7 +60,9 @@ class ConnectionCubit extends Cubit<ConnectionStates> {
         .addString('your-message')
         .payload;
     client.publishMessage('esp32/pub', MqttQos.exactlyOnce, message!);
-    print("publish Message is ${message.toString()}");
+    String
+    stringData = String.fromCharCodes(message);
+    print("publish Message is ${stringData}");
   }
 
   void setStatus(String content) {

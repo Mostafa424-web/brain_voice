@@ -11,7 +11,9 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppState>(
+    return BlocProvider(
+  create: (context) => AppCubit(),
+  child: BlocBuilder<AppCubit, AppState>(
       builder: (context , state) {
         return PersistentTabView(
           context,
@@ -40,7 +42,8 @@ class MainScreen extends StatelessWidget {
           navBarStyle: NavBarStyle.style11,
         );
       }
-    );
+    ),
+);
   }
 }
 

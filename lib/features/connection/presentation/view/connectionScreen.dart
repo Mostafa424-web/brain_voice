@@ -1,10 +1,8 @@
-import 'dart:convert';
 
 import 'package:brain_voice/core/utils/assets_manager.dart';
 import 'package:brain_voice/features/connection/presentation/view/widgets/video_player.dart';
 import 'package:brain_voice/features/deaf_hearing/manager/connection_cubit.dart';
 import 'package:brain_voice/features/main/manager/app_cubit/app_cubit.dart';
-import 'package:brain_voice/features/main/model/data_model.dart';
 import 'package:brain_voice/features/translator/presentation/view/widgets/drop_down.dart';
 import 'package:brain_voice/features/translator/presentation/view/widgets/input_field.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import 'package:typed_data/src/typed_buffer.dart';
 
 import '../../../../core/utils/styles.dart';
 import '../../../deaf_hearing/manager/connection_states.dart';
@@ -73,6 +70,13 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
             stream: ConnectionCubit.get(context).client.updates,
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
+                final mqttReceivedMessages =
+                    snapshot.data;
+                print(mqttReceivedMessages);
+
+                // final recMess =
+                //     mqttReceivedMessages?[0].payload;
+                // _onDataReceived(recMess!);
                 return Stack(
                   children: [
                     Padding(
@@ -140,11 +144,11 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                   ],
                 );
               } else {
-                // final mqttReceivedMessages = snapshot.data;
-                // // print(mqttReceivedMessages);
-                //
-                // final recMess = mqttReceivedMessages![0].payload;
-                // print("Recieved Message is : $recMess");
+                final mqttReceivedMessages = snapshot.data;
+                // print(mqttReceivedMessages);
+
+                final recMess = mqttReceivedMessages![0].payload;
+                print("Recieved Message is : $recMess");
                 return Center(
                   child: Text(
                     'Connect Gloves To Server',
@@ -176,5 +180,15 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
   void onChangeText(context, String value) {
     textField = value;
     checkValueInJsonData(value);
+  }
+
+  void _onDataReceived(MqttMessage message) {
+    if (message is MqttPublishMessage) {
+      final payload = message.payload.message;
+      String
+      stringData = String.fromCharCodes(payload);
+
+      print('Received data: $stringData');
+    }
   }
 }

@@ -2,7 +2,6 @@ import 'package:brain_voice/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tflite/tflite.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -50,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: 20,
             ),
             TextButton(
-              onPressed: loadModel,
+              onPressed: (){},
               child: const Text(
                 'Other',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -78,16 +77,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Future loadModel() async {
-    Tflite.close();
-    try {
-      String res;
-          res = (await Tflite.loadModel(
-            model: "assets/converted_model.tflite",
-          ))!;
-      print(res);
-    } on PlatformException {
-      print('Failed to load model.');
-    }
-  }
+  // Future loadModel() async {
+  //   Tflite.close();
+  //   try {
+  //     String res;
+  //         res = (await Tflite.loadModel(
+  //           model: "assets/converted_model.tflite",
+  //         ))!;
+  //     print(res);
+  //   } on PlatformException {
+  //     print('Failed to load model.');
+  //   }
+  // }
 }

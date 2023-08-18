@@ -1,13 +1,9 @@
-import 'dart:io';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:brain_voice/core/utils/assets_manager.dart';
 import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mqtt_client/mqtt_client.dart';
-import 'package:mqtt_client/mqtt_server_client.dart';
-import 'package:tflite/tflite.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../deaf_hearing/presentation/view/deaf_hearing.dart';
 
@@ -26,7 +22,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 @override
   void initState() {
     super.initState();
-    initWithLocalModel();
+    // initWithLocalModel();
   }
   @override
   Widget build(BuildContext context) {
@@ -65,7 +61,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               children: [
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DeafHearing()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> FadeInUp(
+                        duration: const Duration(seconds: 1),
+                        child: DeafHearing()),));
+                    // AppCubit.get(context).navigateTo(context, const DeafHearing());
                   },
                   child: Text(
                     'skip',
@@ -86,11 +85,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           Icons.navigate_next_outlined,
                           color: Color(0xffFFFFFF),
                         ), onPressed: ()async{
-                        final _model = await FirebaseModelDownloader.instance
+                        final model1 = await FirebaseModelDownloader.instance
                             .getModel(kModelName,
                             FirebaseModelDownloadType.latestModel);
                         setState(() {
-                          model = _model;
+                          model = model1;
                         });
                         if (model != null) {
                           print('${model!.size}');
@@ -109,20 +108,20 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
     );
   }
-  Future<String?> loadModel() async {
-    Tflite.close();
-    try {
-      String res;
-      res = (await Tflite.loadModel(
-        model: "assets/converted_model.tflite",
-        labels: "assets/file.txt",
-        isAsset: true,
-      ))!;
-      print(res);
-    } on PlatformException catch(e) {
-      print('Failed to load model. ${e.toString()}');
-    }
-  }
+  // Future<String?> loadModel() async {
+  //   Tflite.close();
+  //   try {
+  //     String res;
+  //     res = (await Tflite.loadModel(
+  //       model: "assets/converted_model.tflite",
+  //       labels: "assets/file.txt",
+  //       isAsset: true,
+  //     ))!;
+  //     print(res);
+  //   } on PlatformException catch(e) {
+  //     print('Failed to load model. ${e.toString()}');
+  //   }
+  // }
 FirebaseCustomModel? model;
 
 /// Initially get the lcoal model if found, and asynchronously get the latest one in background.

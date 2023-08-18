@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:brain_voice/core/utils/mqtt_conntioon.dart';
 import 'package:brain_voice/features/CameraScreen/presentation/view/camera_screen.dart';
 import 'package:brain_voice/features/connection/presentation/view/connectionScreen.dart';
-import 'package:brain_voice/features/translator/presentation/view/transloator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +10,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../history/presentation/view/history_screen.dart';
 import '../../../languages/presentation/view/languages.dart';
 import '../../../settings/presentation/views/settings_screen.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/services.dart' as root_bundle;
 
 import '../../model/data_model.dart';
@@ -100,12 +99,9 @@ const ConnectionScreen(),
     const HistoryScreen(),
     const SettingsScreen(),
   ];
-  void navigateTo(context, widget) => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => widget,
-        ),
-      );
+  void navigateTo(context, widget) =>   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> FadeInUp(
+      duration: const Duration(seconds: 1),
+      child: widget),));
 
   void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       context,

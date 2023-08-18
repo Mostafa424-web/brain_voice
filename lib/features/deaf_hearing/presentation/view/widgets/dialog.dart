@@ -48,11 +48,11 @@ class _ArduinoConnectDialogState extends State<ArduinoConnectDialog> {
               ),
             ),
           ),
-          // content: Text("This is NAlertDialog's content"),
           actions: <Widget>[
             TextButton(
                 onPressed: () async {
                   await ConnectionCubit.get(context).mqttConnect();
+                  // ignore: use_build_context_synchronously
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen(
                     hearing: true,),),);
                   // Navigator.of(context).push(MaterialPageRoute(
